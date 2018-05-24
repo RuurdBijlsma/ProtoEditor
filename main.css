@@ -96,7 +96,8 @@ ul:after {
 }
 
 .value[number] {
-    color: #b288ff
+    color: #b288ff;
+    padding-right: 30px;
 }
 
 ::-webkit-scrollbar {
