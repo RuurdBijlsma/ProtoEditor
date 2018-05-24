@@ -9,5 +9,5 @@ function init() {
     let encoded = decoder.encode(decoded);
     console.log("Encoded: ", encoded, "Success: ", encoded === protoUrl);
 
-    document.body.appendChild(new FormCreator().fromObject(decoded));
+    document.querySelector('.right-pane').appendChild(new FormCreator().fromObject(decoded));
 }
