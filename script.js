@@ -1,13 +1,33 @@
 document.addEventListener('DOMContentLoaded', init, false);
 
 function init() {
-	let decoder = new ProtoDecoder();
-    let protoUrl = "!1m5!1m4!1i4!2i11!3i7!4i256!2m8!1e2!2ssvv!4m2!1scb_client!2sapiv3!4m2!1scc!2s*211m3*211e3*212b1*213e2*211m3*211e2*212b1*213e2!3m3!3sUS!12m1!1e68!4e0!23i1301875";
-    console.log('Input:   ', protoUrl);
-    let decoded = decoder.decode(protoUrl);
-    console.log('Decoded: ', decoded);
-    let encoded = decoder.encode(decoded);
-    console.log("Encoded: ", encoded, "Success: ", encoded === protoUrl);
+    decoder = new ProtoDecoder();
+    decodeInput(document.querySelector('.input > textarea').value);
+    encodeInput();
+}
 
-    document.querySelector('.right-pane').appendChild(new FormCreator().fromObject(decoded));
+function encodeInput() {
+    let decodedObject = new FormCreator().toObject(document.querySelector('.right-pane > form'));
+    console.log(decodedObject);
+    showEncoded(decodedObject);
+}
+
+function decodeInput(input) {
+    let decodedObject = decoder.decode(input);
+    console.log(decodedObject);
+    showDecoded(decodedObject);
+    showEncoded(decodedObject);
+}
+
+function showEncoded(decodedObject) {
+    let pane = document.querySelector('.output > div');
+    pane.innerHTML = decoder.encode(decodedObject);
+}
+
+function showDecoded(decodedObject) {
+    let pane = document.querySelector('.right-pane');
+    while (pane.hasChildNodes())
+        pane.removeChild(pane.lastChild);
+
+    pane.appendChild(new FormCreator().fromObject(decodedObject));
 }
